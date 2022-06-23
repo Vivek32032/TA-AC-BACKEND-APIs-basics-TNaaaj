@@ -37,7 +37,7 @@ router.put('/:id', (req, res, next) => {
 //delete a book
 
 router.delete('/:id', (req, res, next) => {
-  let boodId = req.params.id;
+  let bookId = req.params.id;
 
   Book.findByIdAndDelete(bookId, (err, deletedBook) => {
     if (err) return next(err);
@@ -58,13 +58,13 @@ router.get('/:id', (req, res, next) => {
 
 //get list of all comments of current book
 
-router.get('/:id/comments', (req, res, next) => {
+router.get('/:id/comment', (req, res, next) => {
   let bookId = req.params.id;
 
   Book.findById(bookId)
     .populate('comments')
     .exec((err, book) => {
-      if (err) return next(err);
+      if (err) return  res.status(500).json(err);
       res.json({ book });
     });
 });
