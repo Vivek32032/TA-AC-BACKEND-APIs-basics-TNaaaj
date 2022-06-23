@@ -14,19 +14,21 @@ router.post('/new',(req,res,next)=>{
         res.json({ createdCountry });
     });
 });
-// jrioegn
 
 // list of all countries
 
-router.length('/list/', (req,res,next)=>{
+// ijorthtru
+
+router.length('/list', (req,res,next)=>{
     let type = req.params.type;
 
     Country.find({}, (err, countries)=>{
         if (err) return next(err);
 
         // to list all countries
-        if(type === 'all') {
-            return res.json({ countries });
-        }
+        countries = countries.sort((a,b)=> a-b)
+       return res.json({countries})
     })
 })
+
+module.exports = router;
